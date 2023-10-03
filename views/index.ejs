@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        .form-container input[type="text"] {
+            width: 300px;
+            height: 30px;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .form-container input[type="submit"] {
+            height: 30px;
+            padding: 5px 15px;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>URL Shortener</h1>
+
+    <div class="form-container">
+        <form id="urlForm" method="POST">
+            <label for="urlInput">Enter URL:</label>
+            <input type="text" id="urlInput" name="urlInput" required placeholder="http://this.is.way/too/long?isnt=it">
+            <label for="abbreviationInput">Enter Abbreviation:</label>
+            <input type="text" id="abbreviationInput" name="abbreviationInput" required placeholder="http://localhost:3000/......">
+            <input type="submit" value="Shorten URL">
+        </form>
+    </div>
+
+    <div class="table-container">
+        <table id="urlTable">
+            <tr>
+                <th>Original URL</th>
+                <th>Shortened URL</th>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/cat-backend-nodejs/nodejs-roadmap">https://github.com/cat-backend-nodejs/nodejs-roadmap</a></td>
+                <td><a href="http://localhost:3000/nodejs">http://localhost:3000/nodejs</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://stackoverflow.com/users/11936196/seif-el-din-sweilam">https://stackoverflow.com/users/11936196/seif-el-din-sweilam</a></td>
+                <td><a href="http://localhost:3000/stackoverflow">http://localhost:3000/stackoverflow</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://drive.google.com/drive/u/1/folders/1bpiBKNBd9n0Z79wrZvHVT1KyA9OBROLx">https://drive.google.com/drive/u/1/folders/1bpiBKNBd9n0Z79wrZvHVT1KyA9OBROLx</a></td>
+                <td><a href="http://localhost:3000/himym">http://localhost:3000/himym</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
