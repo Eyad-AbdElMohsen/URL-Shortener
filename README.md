@@ -38,8 +38,9 @@ http://localhost:3000/{alias}
 - [ ] The application uses server-side rendering
 - [ ] The application uses a MongoDB database
 
-## Project Evaluation (40 pts.)
+## Project Evaluation (50 pts.)
 
 * Project Completeness (25 pts.)
 * Clean Code and Modulation (15 pts.)
+* Descriptive Git Commit Messages (10 pts.)
 * Nice touches (5 pts. bonus)
