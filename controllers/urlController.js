@@ -57,4 +57,11 @@ exports.getUrlStats = async (req, res) => {
     }
 };
 
-
+exports.getAllUrls = async (req, res) => {
+    try {
+        const urls = await URL.find();
+        res.json(urls);
+    } catch (error) {
+        return res.status(500).render('error', { message: error.message, error: { status: 500 } });
+    }
+};

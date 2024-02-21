@@ -9,6 +9,7 @@ router.get('/', function (req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
+router.get('/urls', urlController.getAllUrls);
 router.post('/shorten', validateUrlInput, urlController.shortenUrl);
 router.get('/:alias', urlController.redirectToOriginalUrl);
 router.get('/:alias/stats', urlController.getUrlStats);
