@@ -75,18 +75,17 @@
                 <th>Original URL</th>
                 <th>Shortened URL</th>
             </tr>
-            <tr>
-                <td><a href="https://github.com/cat-backend-nodejs/nodejs-roadmap">https://github.com/cat-backend-nodejs/nodejs-roadmap</a></td>
-                <td><a href="http://localhost:3000/nodejs">http://localhost:3000/nodejs</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://stackoverflow.com/users/11936196/seif-el-din-sweilam">https://stackoverflow.com/users/11936196/seif-el-din-sweilam</a></td>
-                <td><a href="http://localhost:3000/stackoverflow">http://localhost:3000/stackoverflow</a></td>
-            </tr>
-            <tr>
-                <td><a href="https://drive.google.com/drive/u/1/folders/1bpiBKNBd9n0Z79wrZvHVT1KyA9OBROLx">https://drive.google.com/drive/u/1/folders/1bpiBKNBd9n0Z79wrZvHVT1KyA9OBROLx</a></td>
-                <td><a href="http://localhost:3000/himym">http://localhost:3000/himym</a></td>
-            </tr>
+            <% for (link of links){%>
+                <tr>
+                    <td><a href="<%=link.long%>">
+                            <%=link.long%>
+                        </a>
+                    </td>
+                    <td><a href="http://localhost:3000/<%=link.alias%>">
+                            http://localhost:3000/<%=link.alias%>
+                        </a></td>
+                </tr>
+                <%}%>
         </table>
     </div>
 
