@@ -12,7 +12,7 @@
     <h1>URL Shortener</h1>
 
     <div class="form-container">
-        <form id="urlForm" method="POST">
+        <form id="urlForm" action="/" method="POST">
             <label for="urlInput">Enter URL:</label>
             <input type="text" id="urlInput" name="urlInput" required placeholder="http://this.is.way/too/long?isnt=it">
             <label for="aliasInput">Enter alias:</label>
@@ -27,6 +27,7 @@
                 <th>Original URL</th>
                 <th>Shortened URL</th>
             </tr>
+
             <% for (link of links){%>
                 <tr>
                     <td><a href="<%=link.long%>">
@@ -36,12 +37,33 @@
                     <td><a href="http://localhost:3000/<%=link.alias%>">
                             http://localhost:3000/<%=link.alias%>
                         </a></td>
+                    <td><button class="delete-btn" onclick="deleteItem('<%=link.alias%>')">Delete</button></td>
                 </tr>
                 <%}%>
         </table>
     </div>
-
-    <script src="script.js"></script>
+    <script>
+        function deleteItem(alias) {
+            fetch('/', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ alias })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Item deleted successfully.');
+                        window.location.reload();
+                    } else {
+                        alert('Failed to delete item.');
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+        }
+    </script>
 </body>
 
 </html>

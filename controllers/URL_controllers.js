@@ -62,4 +62,4 @@ const delete_link = (req, res) => {
         })
 }
 
-module.exports = { get_home, post_data }
+module.exports = { get_home, post_data, get_redirect, delete_link }
