@@ -5,7 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
-const [DB_URL , userSchema , Url] = require('./routes/database');
+const addUrlRouter = require('./routes/addUrl')
+const {DB_URL , userSchema , Url} = require('./models/db');
 const app = express();
 
 // view engine setup
@@ -17,9 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
-
+app.use('/', addUrlRouter);
 
 
 

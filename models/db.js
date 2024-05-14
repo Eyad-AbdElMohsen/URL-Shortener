@@ -4,4 +4,4 @@ let userSchema = mongoose.Schema({
     url : String
 })
 let Url = mongoose.model('url' , userSchema);
-const exports = {DB_URL , userSchema , Url}
+module.exports = {DB_URL , userSchema , Url}
