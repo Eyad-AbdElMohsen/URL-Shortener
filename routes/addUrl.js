@@ -18,6 +18,7 @@ router.post('/' , async(req , res , next) => {
     if (pattern.test(req.body.aliasInput)) {
         res.status('404').send('Alias contains invalid characters');
     }
+    else{
     let newUrl = new Url({
     url : req.body.urlInput,
     alias : req.body.aliasInput,
@@ -26,5 +27,6 @@ router.post('/' , async(req , res , next) => {
     console.log(url);
     mongoose.disconnect();
     res.redirect('/');
+}
 })
 module.exports = router;
