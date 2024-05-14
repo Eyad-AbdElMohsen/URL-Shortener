@@ -76,7 +76,12 @@
                 <th>Shortened URL</th>
             </tr>
             <tr>
-
+                <% for(let u of urls ){ %>
+                    <tr>
+                        <th><%= u.url %></th>
+                        <th><%= u.alias %></th>
+                    </tr>
+                <% } %>
             </tr>
         </table>
     </div>
