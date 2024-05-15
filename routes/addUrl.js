@@ -107,8 +107,4 @@ async function updateData(req ,res){
             res.status(500).send('Internal Server Error');
         }
 }
-
-
 module.exports = router;
-// if there is an alias input => convert it into link 
-// if not => make a link 

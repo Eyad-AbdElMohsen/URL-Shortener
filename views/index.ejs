@@ -46,12 +46,16 @@
         td {
             padding: 8px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid black;
         }
 
         th {
             background-color: #4CAF50;
+            color: black;
+        }
+        a{
             color: white;
+            font-size: larger;
         }
     </style>
 </head>
@@ -78,8 +82,8 @@
             <tr>
                 <% for(let u of urls ){ %>
                     <tr>
-                        <th><%= u.url %></th>
-                        <th><%= u.alias %></th>
+                        <th><a href="u.url"><%= u.url  %></a></th>
+                        <th><a href="u.alias"><%= u.alias %></a></th>
                     </tr>
                 <% } %>
             </tr>
