@@ -14,7 +14,7 @@ let count = 0;
 function* uniqueUrlGenerator() {
     while (true) {
       const randomString = Math.random().toString(36).substring(2, 8); // Generates a random 6-character string
-    yield `http://URL-Shortener.com/${randomString}`;
+    yield `localhost:3000/${randomString}`;
     }
 }
 
@@ -30,7 +30,7 @@ function validateUrl(req, res, next) {
     if (!urlPattern.test(req.body.urlInput)) {
         res.status(400).send('Not a valid URL');
     } else {
-        console.log(1);
+        console.log("good url");
         next();
     }
 }
@@ -41,7 +41,7 @@ function validateAlias(req, res, next) {
         if (aliasPattern.test(req.body.aliasInput)) {
             res.status(400).send('Alias contains invalid characters');
         } else {
-            console.log(2);
+            console.log("good alias");
             next();
         }
     }
@@ -58,10 +58,10 @@ async function saveData(req, res, next) {
             if (!oldUrl) {
                 let newUrl;
                 if(alias){
-                    console.log("O_O");
+                    console.log("new url with alias");
                     newUrl = new Url({
                         url: req.body.urlInput,
-                        alias: `http://www.${req.body.aliasInput}.com`
+                        alias: `localhoset:3000/${req.body.aliasInput}`
                     });
                 }
                 else{
@@ -71,13 +71,13 @@ async function saveData(req, res, next) {
                         url: req.body.urlInput,
                         alias: NEW.next().value
                     });
-                    console.log('no aliaaaaas')
+                    console.log('new url without alias')
                 }
                 await newUrl.save();
                 mongoose.disconnect();
                 res.redirect('/');
             } else {
-                console.log(3);
+                console.log("old url");
                 next();
             }
         } catch (error) {
@@ -90,11 +90,16 @@ async function updateData(req ,res){
         try {
             await mongoose.connect(DB_URL);
             let oldUrl;
-            if(alias){ oldUrl = await Url.updateOne({ alias : `http://www.${req.body.aliasInput}.com` }); }   
-            else {
+            if(alias){ 
+                oldUrl = await Url.findOne({url : req.body.urlInput })
+                oldUrl.alias = `localhoset:3000/${req.body.aliasInput}`
+            }else { 
                 const NEW = uniqueUrlGenerator();
-                oldUrl = await Url.updateOne({ alias : NEW.next().value });
+                oldUrl = await Url.findOne({url : req.body.urlInput })
+                oldUrl.alias = NEW.next().value;
             }
+            console.log(oldUrl);
+            await oldUrl.save();
             mongoose.disconnect();
             res.redirect('/');
         } catch (error) {
