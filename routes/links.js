@@ -11,10 +11,11 @@ router.use('/',
     urlFromAlias
 );
 async function urlValidation(req, res, next){
-    const findUrl = `localhost:3000${req.url}`;
+    const findAlias = `localhost:3000${req.url}`;
+    const findUrl = `${req.url}`;
     await mongoose.connect(DB_URL);
     foundUrl = await Url.findOne({url : findUrl })
-    foundAlias = await Url.findOne({alias : findUrl })
+    foundAlias = await Url.findOne({alias : findAlias })
     console.log(foundUrl , " " , foundAlias);
     if(foundUrl || foundAlias){
         next();
@@ -24,17 +25,18 @@ async function urlValidation(req, res, next){
     }
     mongoose.disconnect();
 }
-async function urlFromURL(req, res, next){
+function urlFromURL(req, res, next){
     if(foundUrl){
-        res.redirect(`/${foundUrl.url}`);
+        console.log('found url')
+        res.redirect(`${req.url}`);
     }
     else{
         next();
     }
 }
-async function urlFromAlias(req, res, next){
-    console.log('ok')
-    res.redirect(`/${foundAlias.url}`);
+function urlFromAlias(req, res, next){
+    console.log('found alias')
+    res.redirect(`${foundAlias.url}`);
 }
 
 

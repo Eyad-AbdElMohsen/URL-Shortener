@@ -59,7 +59,7 @@ async function saveData(req, res, next) {
                 if(alias){
                     console.log("new url with alias");
                     newUrl = new Url({
-                        url: `localhost:3000/${req.body.urlInput}`,
+                        url: `${req.body.urlInput}`,
                         alias: `localhost:3000/${req.body.aliasInput}`
                     });
                 }
@@ -67,7 +67,7 @@ async function saveData(req, res, next) {
                     const NEW = uniqueUrlGenerator();
                     console.log(NEW);
                     newUrl = new Url({
-                        url: `localhost:3000/${req.body.urlInput}`,
+                        url: `${req.body.urlInput}`,
                         alias: NEW.next().value
                     });
                     console.log('new url without alias')
@@ -90,11 +90,11 @@ async function updateData(req ,res){
             await mongoose.connect(DB_URL);
             let oldUrl;
             if(alias){ 
-                oldUrl = await Url.findOne({url: `localhost:3000/${req.body.urlInput}`, })
+                oldUrl = await Url.findOne({url: `${req.body.urlInput}`, })
                 oldUrl.alias = `localhost:3000/${req.body.aliasInput}`
             }else { 
                 const NEW = uniqueUrlGenerator();
-                oldUrl = await Url.findOne({url: `localhost:3000/${req.body.urlInput}`, })
+                oldUrl = await Url.findOne({url: `${req.body.urlInput}`, })
                 oldUrl.alias = NEW.next().value;
             }
             console.log(oldUrl);
