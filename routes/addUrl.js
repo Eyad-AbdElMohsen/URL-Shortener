@@ -21,6 +21,7 @@ function* uniqueUrlGenerator() {
 router.post('/',
     validateUrl,
     validateAlias,
+    sameAlias,
     saveData,
     updateData,
 );
@@ -46,6 +47,19 @@ function validateAlias(req, res, next) {
     }
     else{
         console.log('no alias')
+        next();
+    }
+}
+// alias is already exists or no
+async function sameAlias(req,res,next){
+    await mongoose.connect(DB_URL);
+    const findAlias = `localhost:3000/${req.body.aliasInput}`;
+    const foundUrl = await Url.findOne({ alias : findAlias });
+    console.log(foundUrl);
+    if(foundUrl){
+        res.status(500).send("You have used same Alias before :(");
+    }else{
+        console.log('new alias' , req.body.aliasInput);
         next();
     }
 }
