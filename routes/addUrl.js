@@ -14,7 +14,7 @@ let count = 0;
 function* uniqueUrlGenerator() {
     while (true) {
       const randomString = Math.random().toString(36).substring(2, 8); // Generates a random 6-character string
-    yield `http://example.com/${randomString}`;
+    yield `http://URL-Shortener.com/${randomString}`;
     }
 }
 
@@ -58,9 +58,10 @@ async function saveData(req, res, next) {
             if (!oldUrl) {
                 let newUrl;
                 if(alias){
+                    console.log("O_O");
                     newUrl = new Url({
                         url: req.body.urlInput,
-                        alias: req.body.aliasInput
+                        alias: `http://www.${req.body.aliasInput}.com`
                     });
                 }
                 else{
@@ -89,7 +90,7 @@ async function updateData(req ,res){
         try {
             await mongoose.connect(DB_URL);
             let oldUrl;
-            if(alias){ oldUrl = await Url.updateOne({ alias : req.body.aliasInput }); }   
+            if(alias){ oldUrl = await Url.updateOne({ alias : `http://www.${req.body.aliasInput}.com` }); }   
             else {
                 const NEW = uniqueUrlGenerator();
                 oldUrl = await Url.updateOne({ alias : NEW.next().value });
