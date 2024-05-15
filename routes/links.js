@@ -21,7 +21,7 @@ async function urlValidation(req, res, next){
         next();
     }
     else{
-        res.status(500).send("Invalid Url ,pls go back and try a valid url")
+        res.status(404).send("Invalid Url ,pls go back and try a valid url")
     }
     mongoose.disconnect();
 }

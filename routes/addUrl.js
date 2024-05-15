@@ -10,7 +10,6 @@ const urlPattern = new RegExp('^(https?://)?'+
     '(\\#[-a-z\\d_]*)?$','i');
 const aliasPattern = /[^a-zA-Z0-9_]/;
 let alias;
-let count = 0;
 function* uniqueUrlGenerator() {
     while (true) {
       const randomString = Math.random().toString(36).substring(2, 8); // Generates a random 6-character string
@@ -56,6 +55,7 @@ async function sameAlias(req,res,next){
     const findAlias = `localhost:3000/${req.body.aliasInput}`;
     const foundUrl = await Url.findOne({ alias : findAlias });
     console.log(foundUrl);
+    mongoose.disconnect();
     if(foundUrl){
         res.status(500).send("You have used same Alias before :(");
     }else{
@@ -90,6 +90,7 @@ async function saveData(req, res, next) {
                 mongoose.disconnect();
                 res.redirect('/');
             } else {
+                mongoose.disconnect();
                 console.log("old url");
                 next();
             }
