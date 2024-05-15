@@ -80,12 +80,12 @@
                 <th>Shortened URL</th>
             </tr>
             <tr>
-                <% for(let u of urls ){ %>
+                <% for(let u of urls) { %>
                     <tr>
-                        <th><a href="u.url"><%= u.url  %></a></th>
-                        <th><a href="u.alias"><%= u.alias %></a></th>
+                    <th><a href="<%= u.url %>"><%= u.url %></a></th>
+                    <th><a href="<%= u.alias %>"><%= u.alias %></a></th>
                     </tr>
-                <% } %>
+                    <% } %>
             </tr>
         </table>
     </div>

@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const addUrlRouter = require('./routes/addUrl')
 const homePageRouter = require('./routes/homePage')
+const links = require('./routes/links')
 const {DB_URL , userSchema , Url} = require('./models/db');
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', addUrlRouter);
 app.use('/', homePageRouter);
+app.use('/' ,links);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

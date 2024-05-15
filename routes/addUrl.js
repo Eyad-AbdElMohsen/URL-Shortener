@@ -24,7 +24,6 @@ router.post('/',
     saveData,
     updateData,
 );
-
 // URL check
 function validateUrl(req, res, next) {
     if (!urlPattern.test(req.body.urlInput)) {
@@ -60,15 +59,15 @@ async function saveData(req, res, next) {
                 if(alias){
                     console.log("new url with alias");
                     newUrl = new Url({
-                        url: req.body.urlInput,
-                        alias: `localhoset:3000/${req.body.aliasInput}`
+                        url: `localhost:3000/${req.body.urlInput}`,
+                        alias: `localhost:3000/${req.body.aliasInput}`
                     });
                 }
                 else{
                     const NEW = uniqueUrlGenerator();
                     console.log(NEW);
                     newUrl = new Url({
-                        url: req.body.urlInput,
+                        url: `localhost:3000/${req.body.urlInput}`,
                         alias: NEW.next().value
                     });
                     console.log('new url without alias')
@@ -91,11 +90,11 @@ async function updateData(req ,res){
             await mongoose.connect(DB_URL);
             let oldUrl;
             if(alias){ 
-                oldUrl = await Url.findOne({url : req.body.urlInput })
-                oldUrl.alias = `localhoset:3000/${req.body.aliasInput}`
+                oldUrl = await Url.findOne({url: `localhost:3000/${req.body.urlInput}`, })
+                oldUrl.alias = `localhost:3000/${req.body.aliasInput}`
             }else { 
                 const NEW = uniqueUrlGenerator();
-                oldUrl = await Url.findOne({url : req.body.urlInput })
+                oldUrl = await Url.findOne({url: `localhost:3000/${req.body.urlInput}`, })
                 oldUrl.alias = NEW.next().value;
             }
             console.log(oldUrl);
