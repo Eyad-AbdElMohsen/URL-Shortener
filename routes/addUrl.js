@@ -90,6 +90,10 @@ async function updateData(req ,res){
             await mongoose.connect(DB_URL);
             let oldUrl;
             if(alias){ oldUrl = await Url.updateOne({ alias : req.body.aliasInput }); }   
+            else {
+                const NEW = uniqueUrlGenerator();
+                oldUrl = await Url.updateOne({ alias : NEW.next().value });
+            }
             mongoose.disconnect();
             res.redirect('/');
         } catch (error) {
