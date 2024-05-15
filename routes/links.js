@@ -11,7 +11,7 @@ router.use('/',
     urlFromAlias
 );
 async function urlValidation(req, res, next){
-    const findAlias = `localhost:3000${req.url}`;
+    const findAlias = `http://localhost:3000${req.url}`;
     const findUrl = `${req.url}`;
     await mongoose.connect(DB_URL);
     foundUrl = await Url.findOne({url : findUrl })

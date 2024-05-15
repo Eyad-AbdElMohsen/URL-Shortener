@@ -13,7 +13,7 @@ let alias;
 function* uniqueUrlGenerator() {
     while (true) {
       const randomString = Math.random().toString(36).substring(2, 8); // Generates a random 6-character string
-    yield `localhost:3000/${randomString}`;
+    yield `http://localhost:3000/${randomString}`;
     }
 }
 
@@ -52,7 +52,7 @@ function validateAlias(req, res, next) {
 // alias is already exists or no
 async function sameAlias(req,res,next){
     await mongoose.connect(DB_URL);
-    const findAlias = `localhost:3000/${req.body.aliasInput}`;
+    const findAlias = `http://localhost:3000/${req.body.aliasInput}`;
     const foundUrl = await Url.findOne({ alias : findAlias });
     console.log(foundUrl);
     mongoose.disconnect();
@@ -74,7 +74,7 @@ async function saveData(req, res, next) {
                     console.log("new url with alias");
                     newUrl = new Url({
                         url: `${req.body.urlInput}`,
-                        alias: `localhost:3000/${req.body.aliasInput}`
+                        alias: `http://localhost:3000/${req.body.aliasInput}`
                     });
                 }
                 else{
@@ -106,7 +106,7 @@ async function updateData(req ,res){
             let oldUrl;
             if(alias){ 
                 oldUrl = await Url.findOne({url: `${req.body.urlInput}`, })
-                oldUrl.alias = `localhost:3000/${req.body.aliasInput}`
+                oldUrl.alias = `http://localhost:3000/${req.body.aliasInput}`
             }else { 
                 const NEW = uniqueUrlGenerator();
                 oldUrl = await Url.findOne({url: `${req.body.urlInput}`, })
